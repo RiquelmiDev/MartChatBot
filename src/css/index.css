@@ -54,6 +54,7 @@ body{
 textarea {
     resize: none;
     background: none;
+    text-align: center;
 }
 
 textarea::-webkit-scrollbar{
@@ -68,6 +69,7 @@ textarea:focus, input:focus, select:focus {
     box-shadow: 0 0 0 0;
     border: 1px solid #ffffff;
     outline: 0;
+    text-align: start;
 } 
 
 .interacao button{
