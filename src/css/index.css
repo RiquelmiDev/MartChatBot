@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+    scroll-behavior: smooth;
+    color: white;
+}
+
+body{
+    background-color: #191825;
+}
+
+.container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.historico-de-chat{
+    max-width: 70%;
+    height: 80%;
+    margin-bottom: 50px;
+    overflow:auto;
+    transition: all 0.5s ;
+}
+
+.historico-de-chat::-webkit-scrollbar{
+    display: none;
+}
+
+.interacao{
+    position: absolute;
+    width: 50%;
+    height: 2em;
+    top: 90%;
+}
+
+.interacao textarea{
+    border: none;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    border: 1px solid #ffffff;
+    border-radius: 30px;
+}
+
+textarea {
+    resize: none;
+    background: none;
+}
+
+textarea::-webkit-scrollbar{
+    display: none;
+}
+
+textarea:invalid {
+    border: none;
+}
+
+textarea:focus, input:focus, select:focus {
+    box-shadow: 0 0 0 0;
+    border: 1px solid #ffffff;
+    outline: 0;
+} 
+
+.interacao button{
+    background: none;
+    border: none;
+    position: absolute;
+    width: 40px;
+    height: 100%;
+    right: 1px;
+    cursor: pointer;
+}
+
+
+/* Texto */
+
+#elementoHistoricoChat {
+    padding: 1em;
+}
+
+.elementoUser-h1,
+.elementoMart-h1 {
+    font-size: 1em;
+    margin-top: 20px;
+}
+
+.elementoUser-h1,
+.elementoUser-p {
+    max-width: 50%;
+    justify-content: start;
+    word-wrap: break-word;
+}
+
+.elementoUser-p {
+    background-color: dimgray;
+    border-radius: 10px;
+    padding: 5px;
+    margin-left: 10px;
+}
+
+.elementoMart-p {
+    background-color: #ff6000;
+    border-radius: 10px;
+    padding: 5px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}

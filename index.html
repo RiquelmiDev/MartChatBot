@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MART</title>
+    <link rel="stylesheet" href="./src/css/index.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <div class="container">
+
+      <div id="historico-de-chat" class="historico-de-chat">
+        <div id="elementoHistoricoChat"></div>
+      </div>
+      <div class="interacao">
+        <textarea id="inputValue"></textarea>
+        <button id="bt-enviar"><i class='bx bxs-send'></i></button>
+      </div>
+    </div>
+
+    
+
+    <script type="importmap">
+        {
+          "imports": {
+            "@google/generative-ai": "https://esm.run/@google/generative-ai"
+          }
+        }
+    </script>
+
+    <script type="module" src="./src/js/script.js"></script>
+</body>
+</html>
