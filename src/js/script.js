@@ -52,7 +52,8 @@ document.getElementById("bt-enviar").addEventListener("click", async () => {
     // Verifica se o valor não está vazio
     if (inputValue.trim() !== "") {
       // Envia a mensagem para o chat
-        await sendMessageToChat(inputValue);
+        sendMessageToChat(inputValue);
+        document.getElementById("inputValue").value = "";
     }
 });
 
