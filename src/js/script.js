@@ -53,6 +53,7 @@ document.getElementById("bt-enviar").addEventListener("click", async () => {
     if (inputValue.trim() !== "") {
       // Envia a mensagem para o chat
         sendMessageToChat(inputValue);
+        mensagemUsuario(inputValue);
         document.getElementById("inputValue").value = "";
     }
 });
@@ -65,6 +66,8 @@ document.getElementById("inputValue").addEventListener("keypress", async (e) => 
         const inputValue = document.getElementById("inputValue").value;
         if (inputValue.trim() !== "") {
             sendMessageToChat(inputValue);
+            //Mensagem do usuario aparece na div
+            mensagemUsuario(inputValue);
             document.getElementById("inputValue").value = "";
         }
     }
@@ -97,18 +100,8 @@ async function sendMessageToChat(message) {
     displayChatHistory();
 }
 
-function displayChatHistory() {
-  // Obtém o elemento onde o histórico será exibido
-  const elementoHistoricoChat = document.getElementById("elementoHistoricoChat");
-
-  // Limpa o conteúdo anterior do elemento
-  /* elementoHistoricoChat.innerHTML = ""; */
-
-  // Filtra apenas as mensagens do usuário e as respostas da API
-  const mensagensUsuario = historicoChat.filter(message => message.role === "user");
-  const respostasAPI = historicoChat.filter(message => message.role === "model");
-
-  // Cria um parágrafo para exibir a pergunta do usuário
+function mensagemUsuario(inputValue){
+    // Cria um parágrafo para exibir a pergunta do usuário
   const tituloUser = document.createElement("h1");
   tituloUser.textContent ="Você";
   tituloUser.className="elementoUser-h1";
@@ -116,8 +109,19 @@ function displayChatHistory() {
 
   const paragrafoPergunta = document.createElement("p");
   paragrafoPergunta.className="elementoUser-p";
-  paragrafoPergunta.textContent = mensagensUsuario[mensagensUsuario.length - 1].parts[0].text; // Última pergunta do usuário
+  paragrafoPergunta.textContent = inputValue; // Última pergunta do usuário
   elementoHistoricoChat.appendChild(paragrafoPergunta);
+
+}
+
+function displayChatHistory() {
+  // Obtém o elemento onde o histórico será exibido
+  const elementoHistoricoChat = document.getElementById("elementoHistoricoChat");
+
+
+  // Filtra apenas as mensagens do usuário e as respostas da API
+  const mensagensUsuario = historicoChat.filter(message => message.role === "user");
+  const respostasAPI = historicoChat.filter(message => message.role === "model");
 
   const tituloMart = document.createElement("h1");
   tituloMart.textContent ="Mart";
