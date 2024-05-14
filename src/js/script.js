@@ -1,5 +1,8 @@
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "@google/generative-ai";
 
+//Biblioteca que faz a converção do markdown para elementos html
+import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
+
 import KEY_API from "./apikey.js";
 
 const MODEL_NAME = "gemini-1.5-pro-latest";
@@ -11,7 +14,7 @@ const model = genAI.getGenerativeModel({
   model: MODEL_NAME,
   systemInstruction: {
     role: "system",
-    parts: [{text: "Você é um chatbot que usa o Gemini API do google chamado MART que significa Meu Amigo Resolve Tudo, você foi criado por Riquelmi. Seja engraçado e manere nos emojis"}]
+    parts: [{text: "Você é um chatbot que usa o Gemini API do google chamado MART que significa 'Meu Amigo Resolve Tudo', você foi criado por Riquelmi. Seja engraçado"}]
   } 
 });
 
@@ -24,21 +27,22 @@ const generationConfig = {
 
 // Configurações de segurança para bloqueio de conteúdo prejudicial
 const safetySettings = [
-    {
-        category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-        threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-    },
-    {
-        category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-        threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-    },
-    {
-        category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-        threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-    },
-    {
-        category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-        threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+    {  
+        category: HarmCategory.HARM_CATEGORY_HARASSMENT, 
+        threshold: HarmBlockThreshold.BLOCK_NONE, 
+    }, 
+    { 
+        category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, 
+        threshold: HarmBlockThreshold.BLOCK_NONE, 
+    }, 
+    { 
+        category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, 
+        threshold: HarmBlockThreshold.BLOCK_NONE, 
+    }, 
+    { 
+        category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, 
+        threshold: HarmBlockThreshold.BLOCK_NONE, 
+
     },
 ];
 
@@ -102,36 +106,38 @@ async function sendMessageToChat(message) {
 
 function mensagemUsuario(inputValue){
     // Cria um parágrafo para exibir a pergunta do usuário
-  const tituloUser = document.createElement("h1");
-  tituloUser.textContent ="Você";
-  tituloUser.className="elementoUser-h1";
-  elementoHistoricoChat.appendChild(tituloUser);
+    const tituloUser = document.createElement("h1");
+    tituloUser.textContent ="Você";
+    tituloUser.className="elementoUser-h1";
+    elementoHistoricoChat.appendChild(tituloUser);
 
-  const paragrafoPergunta = document.createElement("p");
-  paragrafoPergunta.className="elementoUser-p";
-  paragrafoPergunta.textContent = inputValue; // Última pergunta do usuário
-  elementoHistoricoChat.appendChild(paragrafoPergunta);
+    const paragrafoPergunta = document.createElement("p");
+    paragrafoPergunta.className="elementoUser-p";
+    paragrafoPergunta.textContent = inputValue; // Última pergunta do usuário
+    elementoHistoricoChat.appendChild(paragrafoPergunta);
 
 }
 
 function displayChatHistory() {
-  // Obtém o elemento onde o histórico será exibido
-  const elementoHistoricoChat = document.getElementById("elementoHistoricoChat");
-
+    // Obtém o elemento onde o histórico será exibido
+    const elementoHistoricoChat = document.getElementById("elementoHistoricoChat");
 
   // Filtra apenas as mensagens do usuário e as respostas da API
-  const mensagensUsuario = historicoChat.filter(message => message.role === "user");
-  const respostasAPI = historicoChat.filter(message => message.role === "model");
+    const mensagensUsuario = historicoChat.filter(message => message.role === "user");
+    const respostasAPI = historicoChat.filter(message => message.role === "model");
 
-  const tituloMart = document.createElement("h1");
-  tituloMart.textContent ="Mart";
-  tituloMart.className="elementoMart-h1";
-  elementoHistoricoChat.appendChild(tituloMart);
+    const tituloMart = document.createElement("h1");
+    tituloMart.textContent ="Mart";
+    tituloMart.className="elementoMart-h1";
+    elementoHistoricoChat.appendChild(tituloMart);
 
-  // Cria um parágrafo para exibir a resposta da API
-  const paragrafoResposta = document.createElement("p");
-  paragrafoResposta.className="elementoMart-p";
-  paragrafoResposta.textContent = respostasAPI[respostasAPI.length - 1].parts[0].text; // Última resposta da API
-  elementoHistoricoChat.appendChild(paragrafoResposta);
+    // Cria um parágrafo para exibir a resposta da API
+    const paragrafoResposta = document.createElement("div");
+    paragrafoResposta.className="elementoMart-p";
+
+    //insertAdjacentHTML adiciona um elemento dentro, fora, antes ou depois de um elemento.
+    //marked verifica se ha markdown e transforma eles em elementos 
+    paragrafoResposta.insertAdjacentHTML('beforeend', marked.parse(respostasAPI[respostasAPI.length - 1].parts[0].text)); // Última resposta da API
+    elementoHistoricoChat.appendChild(paragrafoResposta);
 
 }
