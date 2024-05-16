@@ -1,4 +1,4 @@
 
-const KEY_API = "AIzaSyDQ8uOX6A5Ooc4T19G3oBrTQd3oSv98oUg";
+const KEY_API = "Sua_API_Key";//Digite sua api key aqui
 
 export default KEY_API;

@@ -131,7 +131,7 @@ function displayChatHistory() {
     tituloMart.className="elementoMart-h1";
     elementoHistoricoChat.appendChild(tituloMart);
 
-    // Cria um parágrafo para exibir a resposta da API
+    // Cria uma div para exibir a resposta da API
     const paragrafoResposta = document.createElement("div");
     paragrafoResposta.className="elementoMart-p";
 
