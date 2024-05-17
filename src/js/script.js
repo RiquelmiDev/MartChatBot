@@ -133,7 +133,7 @@ function displayChatHistory() {
 
     // Cria uma div para exibir a resposta da API
     const paragrafoResposta = document.createElement("div");
-    paragrafoResposta.className="elementoMart-p";
+    paragrafoResposta.className="elementoMart-div";
 
     //insertAdjacentHTML adiciona um elemento dentro, fora, antes ou depois de um elemento.
     //marked verifica se ha markdown e transforma eles em elementos 
